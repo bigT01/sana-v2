@@ -1,25 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { alpha } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import AppNavbar from './components/layout/AppNavbar';
+import Header from './components/layout/Header';
+import MainGrid from './components/layout/MainGrid';
+import SideMenu from './components/layout/SideMenu';
+import AppTheme from './theme/AppTheme';
 
-function App() {
+
+function App(props: { disableCustomTheme?: boolean }) {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <AppTheme {...props}>
+    <CssBaseline enableColorScheme />
+    <Box sx={{ display: 'flex' }}>
+      <SideMenu />
+      <AppNavbar />
+      {/* Main content */}
+      <Box
+        component="main"
+        sx={(theme) => ({
+          flexGrow: 1,
+          backgroundColor: theme.vars
+            ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
+            : alpha(theme.palette.background.default, 1),
+          overflow: 'auto',
+        })}
+      >
+        <Stack
+          spacing={2}
+          sx={{
+            alignItems: 'center',
+            mx: 3,
+            pb: 5,
+            mt: { xs: 8, md: 0 },
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Header />
+          <MainGrid />
+        </Stack>
+      </Box>
+    </Box>
+  </AppTheme>
   );
 }
 
