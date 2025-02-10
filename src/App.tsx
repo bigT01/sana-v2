@@ -8,6 +8,7 @@ import Header from './components/layout/Header';
 import MainGrid from './components/layout/MainGrid';
 import SideMenu from './components/layout/SideMenu';
 import AppTheme from './theme/AppTheme';
+import {Outlet} from "react-router-dom";
 
 
 function App(props: { disableCustomTheme?: boolean }) {
@@ -39,7 +40,8 @@ function App(props: { disableCustomTheme?: boolean }) {
                         }}
                     >
                         <Header/>
-                        <MainGrid/>
+                        <Outlet/>
+                        {/*<MainGrid/>*/}
                     </Stack>
                 </Box>
             </Box>

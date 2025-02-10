@@ -7,6 +7,8 @@ import {StyledEngineProvider} from "@mui/material/styles";
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import SignIn from './pages/login/SignIn';
 import PrivateRoute from './components/PrivateRoute';
+import Catalog from "./pages/catalog/Catalog";
+import Home from "./pages/home/Home";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -23,7 +25,10 @@ root.render(
                             <PrivateRoute authenticationPath="/signin"/>
                         }
                     >
-                        <Route path="/" element={<App/>}/>
+                        <Route path="/" element={<App/>}>
+                            <Route path="/catalog" element={<Home />}/>
+                            <Route path="/catalog" element={<Catalog />}/>
+                        </Route>
                     </Route>
                 </Routes>
             </BrowserRouter>
