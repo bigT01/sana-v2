@@ -32,7 +32,7 @@ const ProgressCard: React.FC<ProgressCardProps> = ({ title, subtitle, currentTim
                 </Typography>
                 <Box content={'div'} sx={{display: 'flex', justifyContent:'space-between', alignItems: 'flex-end', gap: '1rem'}}>
                     <Box content={'div'} sx={{width: '60%'}}>
-                        <LinearProgress variant="determinate" value={progress} sx={{mb: 1}} />
+                        <LinearProgress color={'primary'} variant="determinate" value={progress} sx={{mb: 1}} />
                         <Box content={'div'} sx={{width: '100%', display:'flex', justifyContent:'space-between'}}>
                             <Typography variant="body2" fontSize={14} color="text.secondary">
                                 {currentTime} of {totalTime}
