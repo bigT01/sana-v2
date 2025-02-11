@@ -1,17 +1,24 @@
 import React from 'react';
 import { Card, CardContent, Typography, Button, Box } from '@mui/material';
 import CategoryUi from "../../UI/CategoryUI";
+import {useNavigate} from "react-router-dom";
 
 interface CourseCardProps {
+    id: string;
     category: string;
     title: string;
     subtitle: string;
     lessons: number;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ category, title, subtitle, lessons }) => {
+const CourseCard: React.FC<CourseCardProps> = ({id, category, title, subtitle, lessons }) => {
+    const navigate = useNavigate()
+    const handleChangePage = (link: string) => {
+        navigate(link)
+    }
+
     return (
-        <Card sx={{ maxWidth: 345, borderRadius: 2, boxShadow: 3, cursor: 'pointer' }}>
+        <Card sx={{ maxWidth: 345, borderRadius: 2, boxShadow: 3, cursor: 'pointer' }} onClick={() => {handleChangePage(id)}}>
             <CardContent>
                 <Box content={'div'} sx={{position: 'relative', width: '100%', height: 165, mb: 2}}>
                     <img src="/React.png" alt="img:React"

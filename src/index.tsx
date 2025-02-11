@@ -9,6 +9,7 @@ import SignIn from './pages/login/SignIn';
 import PrivateRoute from './components/PrivateRoute';
 import Courses from "./pages/courses/Courses";
 import Home from "./pages/home/Home";
+import Course from "./pages/courses/course/Course";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -28,6 +29,7 @@ root.render(
                         <Route path="/" element={<App/>}>
                             <Route path="/" element={<Home />}/>
                             <Route path="/courses" element={<Courses />}/>
+                            <Route path="/courses/:courseName" element={<Course />}/>
                         </Route>
                     </Route>
                 </Routes>

@@ -11,6 +11,7 @@ import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import BackpackIcon from '@mui/icons-material/Backpack';
 import {useLocation, useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
 
 const mainListItems = [
     {text: 'Home', icon: <HomeRoundedIcon/>, link: '/'},
@@ -27,31 +28,45 @@ export default function MenuContent() {
     const location = useLocation();
     const navigate = useNavigate();
 
+    const [activeItem, setActiveItem] = useState<string>('/')
+
+    useEffect(() => {
+        for (let item of mainListItems) {
+            const shiftedLink = item.link.split('/')
+            shiftedLink.shift()
+            if (shiftedLink) {
+                if (location.pathname.split('/').includes(shiftedLink[0])) {
+                    setActiveItem(item.link)
+                }
+            }
+        }
+    }, [location])
+
     return (
-        <Stack sx={{ flexGrow: 1, p: 1, justifyContent: 'space-between' }}>
+        <Stack sx={{flexGrow: 1, p: 1, justifyContent: 'space-between'}}>
             <List dense>
                 {mainListItems.map((item, index) => (
-                    <ListItem key={index} disablePadding sx={{ display: 'block' }}>
+                    <ListItem key={index} disablePadding sx={{display: 'block'}}>
                         <ListItemButton
                             sx={{cursor: 'pointer'}}
-                            selected={location.pathname === item.link}
+                            selected={activeItem === item.link}
                             onClick={() => navigate(item.link)}
                         >
                             <ListItemIcon>{item.icon}</ListItemIcon>
-                            <ListItemText primary={item.text} />
+                            <ListItemText primary={item.text}/>
                         </ListItemButton>
                     </ListItem>
                 ))}
             </List>
             <List dense>
                 {secondaryListItems.map((item, index) => (
-                    <ListItem key={index} disablePadding sx={{ display: 'block' }}>
+                    <ListItem key={index} disablePadding sx={{display: 'block'}}>
                         <ListItemButton
                             selected={location.pathname === item.link}
                             onClick={() => navigate(item.link)}
                         >
                             <ListItemIcon>{item.icon}</ListItemIcon>
-                            <ListItemText primary={item.text} />
+                            <ListItemText primary={item.text}/>
                         </ListItemButton>
                     </ListItem>
                 ))}

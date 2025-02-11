@@ -11,6 +11,7 @@ const Courses = () => {
                 Courses
             </Typography>
             <CourseCard
+                id={'Frontend-Development:-with-React'}
                 category="DESIGN"
                 title="Create 3D With Blender"
                 subtitle="16 Lessons 48 Hours"

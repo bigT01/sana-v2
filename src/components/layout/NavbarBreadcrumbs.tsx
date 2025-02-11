@@ -42,11 +42,11 @@ export default function NavbarBreadcrumbs() {
             aria-label="breadcrumb"
             separator={<NavigateNextRoundedIcon fontSize="small"/>}
         >
-            <Typography sx={{cursor: 'pointer'}} variant="body1" onClick={() => handleChangePage('/')}>Dashboard</Typography>
-            {pathname.map(pathnameItem => (
-                <Typography variant="body1" sx={{color: 'text.primary', fontWeight: 600, cursor: 'pointer'}}
-                            onClick={() => handleChangePage(RoutingConstants[pathnameItem]?.link ? RoutingConstants[pathnameItem]?.link : pathnameItem)}>
-                    {RoutingConstants[pathnameItem]?.name ? RoutingConstants[pathnameItem]?.name : pathnameItem}
+            <Typography sx={{cursor: 'pointer', color: 'text.primary', fontWeight: 600}} variant="body1" onClick={() => handleChangePage('/')}>Dashboard</Typography>
+            {pathname.map((pathnameItem, index) => (
+                <Typography variant="body1" sx={{color: 'text.primary', opacity: index === pathname.length - 1 ? 0.5 : 1, fontWeight: index === pathname.length - 1 ? 400 : 600, cursor: index === pathname.length - 1 ? 'not-allowed' : 'pointer'}}
+                            onClick={() => handleChangePage(RoutingConstants[pathnameItem]?.link ? RoutingConstants[pathnameItem]?.link : `${location.pathname.split(pathnameItem)[0]}${pathnameItem}`)}>
+                    {RoutingConstants[pathnameItem]?.name ? RoutingConstants[pathnameItem]?.name : pathnameItem.split('-').join(' ')}
                 </Typography>
             ))}
         </StyledBreadcrumbs>
