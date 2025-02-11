@@ -26,7 +26,7 @@ root.render(
                         }
                     >
                         <Route path="/" element={<App/>}>
-                            <Route path="/catalog" element={<Home />}/>
+                            <Route path="/" element={<Home />}/>
                             <Route path="/catalog" element={<Catalog />}/>
                         </Route>
                     </Route>
