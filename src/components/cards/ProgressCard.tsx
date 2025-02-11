@@ -3,6 +3,7 @@ import { Card, CardContent, Typography, LinearProgress, Button } from '@mui/mate
 import { MdOutlinePlayCircleOutline } from "react-icons/md";
 import Box from "@mui/material/Box";
 import {gray} from "../../theme/themePrimitives";
+import CategoryUi from "../../UI/CategoryUI";
 
 interface ProgressCardProps {
     title: string;
@@ -17,14 +18,7 @@ const ProgressCard: React.FC<ProgressCardProps> = ({ title, subtitle, currentTim
         <Card sx={{ maxWidth: 350 }}>
             <CardContent>
                 <Box content={'div'} sx={{display: 'flex', justifyContent: 'space-between', alignItems:'center', marginBottom: '1rem'}}>
-                    <Box content={'div'} sx={{
-                        backgroundColor: (theme) => theme.palette.mode === 'dark' ? `${gray[900]}` : 'hsl(210, 67%, 99%)',
-                        display: "flex", padding: '0.1rem 0.8rem',
-                        borderRadius: '2rem'}}>
-                        <Typography variant="body2" color="text.primary" fontWeight={400}>
-                            {subtitle}
-                        </Typography>
-                    </Box>
+                    <CategoryUi subtitle={subtitle}/>
                     <img src="/logo192.png" alt="img:react" width={36} height={36}/>
                 </Box>
                 <Typography gutterBottom variant="h6" component="div">
