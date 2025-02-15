@@ -10,6 +10,8 @@ import PrivateRoute from './components/PrivateRoute';
 import Courses from "./pages/courses/Courses";
 import Home from "./pages/home/Home";
 import Course from "./pages/courses/course/Course";
+import Lessons from "./pages/courses/course/lessons/Lessons";
+import Lesson from "./pages/courses/course/lessons/lesson/Lesson";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -30,6 +32,9 @@ root.render(
                             <Route path="/" element={<Home />}/>
                             <Route path="/courses" element={<Courses />}/>
                             <Route path="/courses/:courseName" element={<Course />}/>
+                            <Route path="/courses/:courseName/lesson" element={<Lessons />}>
+                                <Route path="/courses/:courseName/lesson/:lessonId" element={<Lesson />}/>
+                            </Route>
                         </Route>
                     </Route>
                 </Routes>

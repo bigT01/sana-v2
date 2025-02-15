@@ -10,7 +10,7 @@ type CategoryUiProps = {
 const CategoryUi = ({subtitle}: CategoryUiProps) => {
     return (
         <Box content={'div'} sx={{
-            backgroundColor: (theme) => theme.palette.mode === 'dark' ? `${gray[900]}` : 'hsl(210, 67%, 99%)',
+            backgroundColor: (theme) => theme.palette.mode === 'dark' ? `${gray[900]}` : `${gray[200]}`,
             display: "flex", padding: '0.1rem 0.8rem',
             borderRadius: '2rem'}}>
             <Typography variant="body2" color="text.primary" fontWeight={400}>
