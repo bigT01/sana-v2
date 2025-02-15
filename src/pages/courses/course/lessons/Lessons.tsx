@@ -7,6 +7,7 @@ import CategoryUi from "../../../../UI/CategoryUI";
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
 import CourseContentTable from "../../../../components/table/courseContentTable";
+import {Outlet} from "react-router-dom";
 
 const Lessons = () => {
     return (
@@ -42,7 +43,7 @@ const Lessons = () => {
             </Box>
             <Box sx={{display: 'grid', gridTemplateColumns: '3fr 2fr', gridColumnGap: '3rem'}}>
                 <Box content={'div'} sx={{width: '100%'}}>
-
+                    <Outlet/>
                 </Box>
                 <Box content={'div'} sx={{width: '100%'}}>
                     <CourseContentTable/>
