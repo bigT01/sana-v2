@@ -2,26 +2,21 @@ import React from 'react';
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import ExpandableTableOfContents from "../../../components/table/ExpandableTableOfContents";
-import BookIcon from '@mui/icons-material/Book';
 import {grey} from "@mui/material/colors";
 import {FiBook, FiShoppingBag} from "react-icons/fi";
 import {RiBarChart2Line} from "react-icons/ri";
-import List from "@mui/material/List";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItem from "@mui/material/ListItem";
 import {
     FaCertificate,
     FaClock,
     FaClosedCaptioning, FaCommentDots,
-    FaFileAlt, FaGift,
+    FaFileAlt,
     FaLanguage,
-    FaMicrophone, FaShoppingBag,
     FaUserGraduate
 } from "react-icons/fa";
-import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
+import {useNavigate} from "react-router-dom";
 
 
 const contents = [
@@ -30,6 +25,7 @@ const contents = [
 ]
 
 const Course = () => {
+    const navigate = useNavigate()
     return (
         <Box sx={{width: '100%', maxWidth: {sm: '100%', md: '1700px'}}}>
 
@@ -144,7 +140,7 @@ const Course = () => {
                         <Button sx={{
                             bgcolor: (theme) => theme.palette.mode === 'dark' ? '#FFFFFF' :'#000000',
                             width: '45%'
-                        }} variant="contained" startIcon={<FiShoppingBag />}>
+                        }} onClick={() => navigate('lesson/Introduction')} variant="contained" startIcon={<FiShoppingBag />}>
                             Enroll a course
                         </Button>
 

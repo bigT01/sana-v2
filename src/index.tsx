@@ -33,7 +33,7 @@ root.render(
                             <Route path="/courses" element={<Courses />}/>
                             <Route path="/courses/:courseName" element={<Course />}/>
                             <Route path="/courses/:courseName/lesson" element={<Lessons />}>
-                                <Route path="/courses/:courseName/lesson/:lessonId" element={<Lesson />}/>
+                                <Route path="/courses/:courseName/lesson/:lessonName" element={<Lesson />}/>
                             </Route>
                         </Route>
                     </Route>
