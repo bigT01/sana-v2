@@ -19,9 +19,9 @@ const mainListItems = [
 ];
 
 const secondaryListItems = [
-    {text: 'Settings', icon: <SettingsRoundedIcon/>, link: '/'},
-    {text: 'About', icon: <InfoRoundedIcon/>, link: '/'},
-    {text: 'Feedback', icon: <HelpRoundedIcon/>, link: '/'},
+    {text: 'Settings', icon: <SettingsRoundedIcon/>, link: '/settings'},
+    {text: 'About', icon: <InfoRoundedIcon/>, link: '/about'},
+    {text: 'Feedback', icon: <HelpRoundedIcon/>, link: '/feedback'},
 ];
 
 export default function MenuContent() {

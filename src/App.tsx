@@ -5,10 +5,10 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import AppNavbar from './components/layout/AppNavbar';
 import Header from './components/layout/Header';
-import MainGrid from './components/layout/MainGrid';
 import SideMenu from './components/layout/SideMenu';
 import AppTheme from './theme/AppTheme';
 import {Outlet} from "react-router-dom";
+import ModalContent from "./components/Modal";
 
 
 function App(props: { disableCustomTheme?: boolean }) {
@@ -44,6 +44,7 @@ function App(props: { disableCustomTheme?: boolean }) {
                         {/*<MainGrid/>*/}
                     </Stack>
                 </Box>
+                <ModalContent/>
             </Box>
         </AppTheme>
     );
