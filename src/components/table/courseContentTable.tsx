@@ -6,7 +6,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import DescriptionIcon from '@mui/icons-material/Description';
 import Box from "@mui/material/Box";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useEffect} from "react";
 
 interface CourseSection {
     title: string;
@@ -20,7 +21,7 @@ const courseContent: CourseSection[] = [
         duration: "22min",
         lessons: [
             { title: "Introduction", duration: "2 min" , type: 'lesson' },
-            { title: "What is Figma?", duration: "5 min", type: 'lesson' },
+            { title: "What is Figma", duration: "5 min", type: 'lesson' },
             { title: "Understanding Figma", duration: "12 min", type: 'exam' },
             { title: "UI tour", duration: "3 min", type: 'lesson' },
         ],
@@ -34,7 +35,12 @@ const courseContent: CourseSection[] = [
 ];
 
 const CourseContentTable = () => {
+    const pathname = useParams()
     const navigate = useNavigate()
+
+    useEffect(() => {
+        console.log(pathname.lessonName)
+    }, []);
     return (
         <div>
             <Typography variant="h6" gutterBottom>
@@ -52,7 +58,7 @@ const CourseContentTable = () => {
                             <List>
                                 {section.lessons.map((lesson, lessonIndex) => (
                                     <ListItem key={lessonIndex} disablePadding={false} >
-                                        <ListItemButton onClick={() => {navigate(lesson.title.split(' ').join('-'))}} sx={{py: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                                        <ListItemButton selected={pathname?.lessonName ? pathname?.lessonName?.split('-').join(' ') === lesson.title : false} onClick={() => {navigate(lesson.title.split(' ').join('-'))}} sx={{py: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                                             <Box content={'div'} sx={{display:'flex', alignItems:'center', gap: 2}}>
                                                 <ListItemIcon>
                                                     {lesson.type === 'lesson' ? <PlayArrowIcon/> : <DescriptionIcon />}
