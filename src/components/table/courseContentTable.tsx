@@ -6,6 +6,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import DescriptionIcon from '@mui/icons-material/Description';
 import Box from "@mui/material/Box";
+import {useNavigate} from "react-router-dom";
 
 interface CourseSection {
     title: string;
@@ -33,6 +34,7 @@ const courseContent: CourseSection[] = [
 ];
 
 const CourseContentTable = () => {
+    const navigate = useNavigate()
     return (
         <div>
             <Typography variant="h6" gutterBottom>
@@ -50,7 +52,7 @@ const CourseContentTable = () => {
                             <List>
                                 {section.lessons.map((lesson, lessonIndex) => (
                                     <ListItem key={lessonIndex} disablePadding={false} >
-                                        <ListItemButton sx={{py: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                                        <ListItemButton onClick={() => {navigate(lesson.title.split(' ').join('-'))}} sx={{py: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                                             <Box content={'div'} sx={{display:'flex', alignItems:'center', gap: 2}}>
                                                 <ListItemIcon>
                                                     {lesson.type === 'lesson' ? <PlayArrowIcon/> : <DescriptionIcon />}
