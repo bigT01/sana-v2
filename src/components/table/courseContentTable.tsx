@@ -7,7 +7,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import DescriptionIcon from '@mui/icons-material/Description';
 import Box from "@mui/material/Box";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 interface CourseSection {
     title: string;
@@ -38,9 +38,6 @@ const CourseContentTable = () => {
     const pathname = useParams()
     const navigate = useNavigate()
 
-    useEffect(() => {
-        console.log(pathname.lessonName)
-    }, []);
     return (
         <div>
             <Typography variant="h6" gutterBottom>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Box from "@mui/material/Box";
 import {IoIosArrowBack} from "react-icons/io";
 import IconButton from "@mui/material/IconButton";
@@ -7,13 +7,28 @@ import CategoryUi from "../../../../UI/CategoryUI";
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
 import CourseContentTable from "../../../../components/table/courseContentTable";
-import {Outlet} from "react-router-dom";
+import {Outlet, useLocation, useNavigate} from "react-router-dom";
 
 const Lessons = () => {
+    const location = useLocation()
+    const navigate = useNavigate()
+    const [backWard, setBackward] = useState('')
+
+
+    useEffect(() => {
+        const arrLocation = location ? location.pathname.split('/') : null
+        if(arrLocation){
+            if(arrLocation.length === 5){
+                arrLocation.pop()
+            }
+            arrLocation.pop()
+            setBackward(arrLocation.join('/'))
+        }
+    }, []);
     return (
         <Box sx={{width: '100%', maxWidth: {sm: '100%', md: '1700px'}}}>
             <Box content={'div'} sx={{display: 'flex', gap: 2, alignItems: 'flex-start', mb: 1}}>
-                <IconButton aria-label="delete">
+                <IconButton aria-label="delete" onClick={() => {navigate(backWard)}}>
                     <IoIosArrowBack />
                 </IconButton>
                 <Box content={'div'} sx={{display: 'flex', flexDirection: 'column', gap: 0.5}}>
