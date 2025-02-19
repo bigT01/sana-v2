@@ -31,9 +31,9 @@ root.render(
                         <Route path="/" element={<App/>}>
                             <Route path="/" element={<Home />}/>
                             <Route path="/courses" element={<Courses />}/>
-                            <Route path="/courses/:courseName" element={<Course />}/>
-                            <Route path="/courses/:courseName/lesson" element={<Lessons />}>
-                                <Route path="/courses/:courseName/lesson/:lessonName" element={<Lesson />}/>
+                            <Route path="/courses/:courseId/:courseName" element={<Course />}/>
+                            <Route path="/courses/:courseId/:courseName/lesson" element={<Lessons />}>
+                                <Route path="/courses/:courseId/:courseName/lesson/:lessonName" element={<Lesson />}/>
                             </Route>
                         </Route>
                     </Route>

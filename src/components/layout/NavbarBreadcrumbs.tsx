@@ -26,9 +26,10 @@ export default function NavbarBreadcrumbs() {
     useEffect(() => {
         if (location) {
             const pathnames = location.pathname.split('/');
-            pathnames.shift()
-            if (pathnames) {
-                setPathname(pathnames)
+            const filteredPathnames = pathnames.filter(item => !/^\d+$/.test(item));
+            filteredPathnames.shift()
+            if (filteredPathnames) {
+                setPathname(filteredPathnames)
             }
         }
     }, [location]);
