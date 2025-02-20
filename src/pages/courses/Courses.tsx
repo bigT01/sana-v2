@@ -6,8 +6,8 @@ import {ICourse, IState} from "../../constants/interfaces";
 import {useStore} from "../../store/useStore";
 
 const Courses = () => {
-    const [courses, setCourses] = useState<ICourse[] | null>(null)
-    const getAllCourses = useStore((state: IState) => state.getAllCourses)
+    const [courses, setCourses] = useState<ICourse[] | null>(null);
+    const getAllCourses = useStore((state: IState) => state.getAllCourses);
 
     useEffect(() => {
         const fetchCourses = async () => {
