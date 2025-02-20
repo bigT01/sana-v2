@@ -41,7 +41,7 @@ const SignIn = (props: { disableCustomTheme?: boolean }) => {
             <CssBaseline enableColorScheme/>
             <SignInContainer direction="column" justifyContent="space-between">
                 <ColorModeSelect sx={{position: 'fixed', top: '1rem', right: '1rem'}}/>
-                {token ? <SignInComponent/> : <OrganizationSelect/>}
+                {!token ? <SignInComponent/> : <OrganizationSelect/>}
             </SignInContainer>
         </AppTheme>
     );

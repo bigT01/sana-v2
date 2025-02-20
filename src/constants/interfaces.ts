@@ -6,6 +6,7 @@ export interface IState {
     getAllCourses: () => Promise<ICourse[] | void>
     getCourseById: (courseId: string) => Promise<ICourse | void>,
     login: (email: string, password: string) => void
+    getMyOrganizations: () => Promise<IOrganization[] | void>
 }
 
 export interface IModal {
@@ -27,6 +28,16 @@ export interface ICourse {
     description: string,
     image_url: string,
     "category": ICategory | null
+}
+
+export interface IOrganization {
+    id: number,
+    name: string,
+    description: string,
+    address: string,
+    phone: string,
+    email: string,
+    owner_id: 1
 }
 
 export interface ILoginResponse {
