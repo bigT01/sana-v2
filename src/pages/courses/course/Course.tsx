@@ -78,7 +78,12 @@ const Course = () => {
                              style={{width: '100%', borderRadius: '2rem', marginBottom: '2rem'}}/>
                         <Typography component="h6" variant="h6" fontWeight={550} color={'primary'} fontSize={16}
                                     sx={{mb: 2}}>
-                            <b style={{opacity: 0.5, color: '#000000'}}>Category: </b> {course.category?.name}
+                            <Typography component="span" variant={'body2'} sx={{
+                                opacity: 0.5,
+                                fontSize: '18px',
+                                fontWeight: '550',
+                                color: (theme) => theme.palette.mode === 'dark' ? '#FFFFFF' : '#000000',
+                            }}>Category: </Typography> {course.category?.name}
                         </Typography>
                         <Typography component="h1" variant="h2" fontWeight={550} sx={{mb: 2}}>
                             {course.name}

@@ -13,6 +13,8 @@ export const getMyOrganizations = async (
         );
         return response.data
     } catch (error: any) {
-        console.log(error)
+        if(error.status === 401){
+            set({token: null})
+        }
     }
 };

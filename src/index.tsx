@@ -28,12 +28,12 @@ root.render(
                             <PrivateRoute authenticationPath="/signin"/>
                         }
                     >
-                        <Route path="/" element={<App/>}>
-                            <Route path="/" element={<Home />}/>
-                            <Route path="/courses" element={<Courses />}/>
-                            <Route path="/courses/:courseId/:courseName" element={<Course />}/>
-                            <Route path="/courses/:courseId/:courseName/lesson" element={<Lessons />}>
-                                <Route path="/courses/:courseId/:courseName/lesson/:lessonName" element={<Lesson />}/>
+                        <Route path="/:organizationId" element={<App/>}>
+                            <Route path="/:organizationId" element={<Home />}/>
+                            <Route path="/:organizationId/courses" element={<Courses />}/>
+                            <Route path="/:organizationId/courses/:courseId/:courseName" element={<Course />}/>
+                            <Route path="/:organizationId/courses/:courseId/:courseName/lesson" element={<Lessons />}>
+                                <Route path="/:organizationId/courses/:courseId/:courseName/lesson/:lessonName" element={<Lesson />}/>
                             </Route>
                         </Route>
                     </Route>

@@ -5,9 +5,12 @@ import {brand} from "../../../theme/themePrimitives";
 import {useStore} from "../../../store/useStore";
 import {IOrganization, IState} from "../../../constants/interfaces";
 import Button from "@mui/material/Button";
+import {useNavigate} from "react-router-dom";
 
 
 const OrganizationTypeSelector = () => {
+    const navigate = useNavigate();
+
     const token = useStore((state: IState) => state.token);
     const getMyOrganizations = useStore((state: IState) => state.getMyOrganizations);
 
@@ -31,6 +34,12 @@ const OrganizationTypeSelector = () => {
             fetchCourses();
         // }
     }, [token]);
+
+    const handleSelect = () => {
+        if(selected > 0){
+            navigate(`/${selected}`)
+        }
+    }
 
     return (
         <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
@@ -68,7 +77,7 @@ const OrganizationTypeSelector = () => {
                 )) : 'you not joined any organization yet'}
 
             </Box>
-            <Button variant="contained" size={'large'} color={'info'} disabled={selected > 0 ? false : true} sx={{mx: 'auto', fontSize: '24px', color: 'white', fontWeight: '600'}}>
+            <Button onClick={() => handleSelect()} variant="contained" size={'large'} color={'info'} disabled={selected > 0 ? false : true} sx={{mx: 'auto', fontSize: '24px', color: 'white', fontWeight: '600'}}>
                 Select
             </Button>
         </Box>

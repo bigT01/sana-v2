@@ -14,14 +14,14 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 
 const mainListItems = [
-    {text: 'Home', icon: <HomeRoundedIcon/>, link: '/'},
-    {text: 'Courses', icon: <BackpackIcon/>, link: '/courses'},
+    {text: 'Home', icon: <HomeRoundedIcon/>, link: ''},
+    {text: 'Courses', icon: <BackpackIcon/>, link: 'courses'},
 ];
 
 const secondaryListItems = [
-    {text: 'Settings', icon: <SettingsRoundedIcon/>, link: '/settings'},
-    {text: 'About', icon: <InfoRoundedIcon/>, link: '/about'},
-    {text: 'Feedback', icon: <HelpRoundedIcon/>, link: '/feedback'},
+    {text: 'Settings', icon: <SettingsRoundedIcon/>, link: 'settings'},
+    {text: 'About', icon: <InfoRoundedIcon/>, link: 'about'},
+    {text: 'Feedback', icon: <HelpRoundedIcon/>, link: 'feedback'},
 ];
 
 export default function MenuContent() {
@@ -32,12 +32,9 @@ export default function MenuContent() {
 
     useEffect(() => {
         for (let item of mainListItems) {
-            const shiftedLink = item.link.split('/')
-            shiftedLink.shift()
-            if (shiftedLink) {
-                if (location.pathname.split('/').includes(shiftedLink[0])) {
-                    setActiveItem(item.link)
-                }
+            const shiftedLink = item.link
+            if (location.pathname.split('/').includes(shiftedLink)) {
+                setActiveItem(item.link)
             }
         }
     }, [location])
@@ -49,7 +46,7 @@ export default function MenuContent() {
                     <ListItem key={index} disablePadding sx={{display: 'block'}}>
                         <ListItemButton
                             sx={{cursor: 'pointer'}}
-                            selected={activeItem === item.link}
+                            selected={activeItem === `${item.link}`}
                             onClick={() => navigate(item.link)}
                         >
                             <ListItemIcon>{item.icon}</ListItemIcon>
