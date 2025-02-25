@@ -16,19 +16,14 @@ import {
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {useStore} from "../../../store/useStore";
-import {ICourse, IState} from "../../../constants/interfaces";
-import {brand} from "../../../theme/themePrimitives";
+import {ICourse, IState, ITopic} from "../../../constants/interfaces";
 
-
-const contents = [
-    {title: 'Introduction', content: 'Overview of the course and objectives.'},
-    {title: 'Preparing the character', content: 'Steps to set up your character in Blender.'},
-]
 
 const Course = () => {
     const getCourseById = useStore((state: IState) => state.getCourseById)
+    const getTopicByCourseId = useStore((state: IState) => state.getTopicByCourseId)
 
     const params = useParams();
 
@@ -37,6 +32,7 @@ const Course = () => {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
 
     const [course, setCourse] = useState<ICourse | null>(null)
+    const [topic, setTopic] = useState<ITopic[] | null>(null)
 
     useEffect(() => {
         if(loading){
@@ -58,6 +54,11 @@ const Course = () => {
                     const data = await getCourseById(params.courseId); // Ожидаем завершения асинхронной операции
                     if (data) {
                         setCourse(data); // Устанавливаем данные в состояние
+                    }
+
+                    const dataTopic = await getTopicByCourseId(params.courseId);
+                    if (dataTopic) {
+                        setTopic(dataTopic); // Устанавливаем данные в состояние
                     }
                 } catch (error) {
                     console.error("Failed to fetch courses:", error);
@@ -91,7 +92,7 @@ const Course = () => {
                         <Typography component="p" variant="body1" paragraph={true} fontWeight={550} sx={{mb: 3}}>
                             {course.description}
                         </Typography>
-                        <ExpandableTableOfContents title="COURSE TABLE OF CONTENTS" items={contents}/>
+                        {topic && <ExpandableTableOfContents title="COURSE TABLE OF CONTENTS" items={topic}/>}
                     </Box>
                     <Box content={'div'} sx={{width: '100%'}}>
                         <Box content={'div'} sx={{

@@ -1,15 +1,16 @@
-import {IOrganization, IState} from "../../../constants/interfaces";
+import {IState, ITopic} from "../../../constants/interfaces";
 import axios from "../../../axios";
 import {ErrorCatcher} from "../../errorCatcher";
 
-export const getMyOrganizations = async (
+export const getTopicByCourseId = async (
     set: (partial: Partial<IState>) => void,
     get: () => IState,
-): Promise<IOrganization[] | void> => {
+    courseId: string
+): Promise<ITopic[] | void> => {
     const {token} = get()
     try {
-        const response = await axios.get<IOrganization[]>(
-            "/organization-participant/my-organizations",
+        const response = await axios.get<ITopic[]>(
+            `/topic/course/${courseId}`,
             {headers: {Authorization: `Bearer ${token}`}},
         );
         return response.data

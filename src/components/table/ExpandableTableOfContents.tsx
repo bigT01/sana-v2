@@ -12,7 +12,7 @@ import {grey} from "@mui/material/colors";
 
 interface ExpandableTableOfContentsProps {
     title: string;
-    items: { title: string; content?: string }[];
+    items: { name: string; description: string }[];
 }
 
 const ExpandableTableOfContents: React.FC<ExpandableTableOfContentsProps> = ({ title, items }) => {
@@ -40,10 +40,10 @@ const ExpandableTableOfContents: React.FC<ExpandableTableOfContentsProps> = ({ t
                         aria-controls={`panel${index}-content`}
                         id={`panel${index}-header`}
                     >
-                        <Typography>{item.title}</Typography>
+                        <Typography>{item.name}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography>{item.content || 'Additional details go here...'}</Typography>
+                        <Typography>{item.description || 'Additional details go here...'}</Typography>
                     </AccordionDetails>
                 </Accordion>
             ))}

@@ -5,6 +5,7 @@ import {getAllCourses} from "./storeAction/course/getAllCourses";
 import {getCourseById} from "./storeAction/course/getCourseById";
 import {Login} from "./storeAction/auth/Login";
 import {getMyOrganizations} from "./storeAction/organization/getMyOrganizations";
+import {getTopicByCourseId} from "./storeAction/topic/getTopicByCourseId";
 
 export const useStore = create<IState>()(
     devtools(
@@ -17,7 +18,8 @@ export const useStore = create<IState>()(
                 getAllCourses: () => getAllCourses(set, get),
                 getCourseById: (courseId) => getCourseById(set, get, courseId),
                 login: (email, password) => Login(set, get, email, password),
-                getMyOrganizations: () => getMyOrganizations(set, get)
+                getMyOrganizations: () => getMyOrganizations(set, get),
+                getTopicByCourseId: (courseId) => getTopicByCourseId(set, get, courseId)
             }), {name: "quiz-storage"}
         )
     )

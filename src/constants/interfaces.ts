@@ -7,6 +7,7 @@ export interface IState {
     getCourseById: (courseId: string) => Promise<ICourse | void>,
     login: (email: string, password: string) => void
     getMyOrganizations: () => Promise<IOrganization[] | void>
+    getTopicByCourseId: (courseId: string) => Promise<ITopic[] | void>
 }
 
 export interface IModal {
@@ -38,6 +39,13 @@ export interface IOrganization {
     phone: string,
     email: string,
     owner_id: 1
+}
+
+export interface ITopic {
+    id: number,
+    course_id: number,
+    name: string,
+    description: string
 }
 
 export interface ILoginResponse {
