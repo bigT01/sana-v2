@@ -4,7 +4,6 @@ import {
     AccordionSummary,
     AccordionDetails,
     Typography,
-    Divider,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Box from "@mui/material/Box";

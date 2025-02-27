@@ -8,33 +8,13 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import Box from "@mui/material/Box";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
+import {ILessonWithTopic} from "../../constants/interfaces";
 
-interface CourseSection {
-    title: string;
-    duration: string;
-    lessons?: { title: string; duration: string, type: string }[];
+type CourseContentTableProps = {
+    courseContent: ILessonWithTopic[]
 }
 
-const courseContent: CourseSection[] = [
-    {
-        title: "Intro",
-        duration: "22min",
-        lessons: [
-            { title: "Introduction", duration: "2 min" , type: 'lesson' },
-            { title: "What is Figma", duration: "5 min", type: 'lesson' },
-            { title: "Understanding Figma", duration: "12 min", type: 'exam' },
-            { title: "UI tour", duration: "3 min", type: 'lesson' },
-        ],
-    },
-    { title: "Intermediate Level Stuff", duration: "1h 20min" },
-    { title: "Advanced Stuff", duration: "36min" },
-    { title: "Imports & Graphics", duration: "40min" },
-    { title: "Component in Figma", duration: "1h 12min" },
-    { title: "Styles in Figma", duration: "41min" },
-    { title: "Summary", duration: "8min" },
-];
-
-const CourseContentTable = () => {
+const CourseContentTable = ({courseContent}: CourseContentTableProps) => {
     const pathname = useParams()
     const navigate = useNavigate()
 
@@ -47,7 +27,7 @@ const CourseContentTable = () => {
                 <Accordion key={index} defaultExpanded={index === 0}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography>
-                            {index + 1 < 10 ? `0${index + 1}` : index + 1}: {section.title} ({section.duration})
+                            {index + 1 < 10 ? `0${index + 1}` : index + 1}: {section.name}
                         </Typography>
                     </AccordionSummary>
                     {section.lessons && (
@@ -55,14 +35,14 @@ const CourseContentTable = () => {
                             <List>
                                 {section.lessons.map((lesson, lessonIndex) => (
                                     <ListItem key={lessonIndex} disablePadding={false} >
-                                        <ListItemButton selected={pathname?.lessonName ? pathname?.lessonName?.split('-').join(' ') === lesson.title : false} onClick={() => {navigate(lesson.title.split(' ').join('-'))}} sx={{py: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                                        <ListItemButton selected={pathname?.lessonName ? pathname?.lessonName?.split('-').join(' ') === lesson.name : false} onClick={() => {navigate(lesson.name.split(' ').join('-'))}} sx={{py: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                                             <Box content={'div'} sx={{display:'flex', alignItems:'center', gap: 2}}>
                                                 <ListItemIcon>
-                                                    {lesson.type === 'lesson' ? <PlayArrowIcon/> : <DescriptionIcon />}
+                                                     <PlayArrowIcon/>
                                                 </ListItemIcon>
-                                                <ListItemText primary={`${lesson.title}`} />
+                                                <ListItemText primary={`${lesson.name}`} />
                                             </Box>
-                                            <ListItemText primary={`${lesson.duration}`} sx={{textAlign: 'end'}}/>
+                                            {/*<ListItemText primary={`${lesson.duration}`} sx={{textAlign: 'end'}}/>*/}
                                         </ListItemButton>
                                     </ListItem>
                                 ))}

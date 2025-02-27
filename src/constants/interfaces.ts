@@ -8,6 +8,7 @@ export interface IState {
     login: (email: string, password: string) => void
     getMyOrganizations: () => Promise<IOrganization[] | void>
     getTopicByCourseId: (courseId: string) => Promise<ITopic[] | void>
+    getLessonsByCourseId: (courseId: string) => Promise<ILessonWithTopic[] | void>
 }
 
 export interface IModal {
@@ -31,6 +32,16 @@ export interface ICourse {
     "category": ICategory | null
 }
 
+export interface ILesson {
+    id: number,
+    topic_id: number,
+    description: string,
+    video_url: string,
+    source_url: string,
+    name: string,
+    created_at: string
+}
+
 export interface IOrganization {
     id: number,
     name: string,
@@ -50,4 +61,8 @@ export interface ITopic {
 
 export interface ILoginResponse {
     access_token: string
+}
+
+export interface ILessonWithTopic extends ITopic {
+    lessons: ILesson[]
 }
