@@ -4,10 +4,8 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import DescriptionIcon from '@mui/icons-material/Description';
 import Box from "@mui/material/Box";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
 import {ILessonWithTopic} from "../../constants/interfaces";
 
 type CourseContentTableProps = {
@@ -35,7 +33,7 @@ const CourseContentTable = ({courseContent}: CourseContentTableProps) => {
                             <List>
                                 {section.lessons.map((lesson, lessonIndex) => (
                                     <ListItem key={lessonIndex} disablePadding={false} >
-                                        <ListItemButton selected={pathname?.lessonName ? pathname?.lessonName?.split('-').join(' ') === lesson.name : false} onClick={() => {navigate(lesson.name.split(' ').join('-'))}} sx={{py: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                                        <ListItemButton selected={pathname?.lessonId === `${lesson.id}` ? true : false} onClick={() => {navigate(`${lesson.id}/${lesson.name.split(' ').join('-')}`)}} sx={{py: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                                             <Box content={'div'} sx={{display:'flex', alignItems:'center', gap: 2}}>
                                                 <ListItemIcon>
                                                      <PlayArrowIcon/>
