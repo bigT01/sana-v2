@@ -1,6 +1,6 @@
 import {devtools, persist} from "zustand/middleware";
 import {create} from "zustand/react";
-import {IModal, IState} from "../constants/interfaces";
+import {IAlert, IModal, IState} from "../constants/interfaces";
 import {getAllCourses} from "./storeAction/course/getAllCourses";
 import {getCourseById} from "./storeAction/course/getCourseById";
 import {Login} from "./storeAction/auth/Login";
@@ -14,6 +14,7 @@ export const useStore = create<IState>()(
             (set, get) => ({
                 token: null,
                 modal: {isModalOpen: false, ModalType: null},
+                alert: null,
                 setToken: (token) => set({token: token} ,false, 'set-token'),
                 setModal: ({isModalOpen, ModalType}: IModal) => set({modal: {isModalOpen, ModalType}}, false, 'set-modal'),
                 getAllCourses: () => getAllCourses(set, get),
@@ -21,7 +22,8 @@ export const useStore = create<IState>()(
                 login: (email, password) => Login(set, get, email, password),
                 getMyOrganizations: () => getMyOrganizations(set, get),
                 getTopicByCourseId: (courseId) => getTopicByCourseId(set, get, courseId),
-                getLessonsByCourseId: (courseId) => getLessonsByCourseId(set, get, courseId)
+                getLessonsByCourseId: (courseId) => getLessonsByCourseId(set, get, courseId),
+                setAlert: (information: IAlert | null) => set({alert: information}, false, "set-alert")
             }), {name: "quiz-storage"}
         )
     )

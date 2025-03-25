@@ -1,14 +1,22 @@
 export interface IState {
     token: string | null,
-    setToken: (token: string | null) => void
     modal: IModal,
-    setModal: ({isModalOpen, ModalType}:IModal) => void
-    getAllCourses: () => Promise<ICourse[] | void>
+    alert: IAlert | null,
+    setToken: (token: string | null) => void,
+    setModal: ({isModalOpen, ModalType}:IModal) => void,
+    getAllCourses: () => Promise<ICourse[] | void>,
     getCourseById: (courseId: string) => Promise<ICourse | void>,
-    login: (email: string, password: string) => void
-    getMyOrganizations: () => Promise<IOrganization[] | void>
-    getTopicByCourseId: (courseId: string) => Promise<ITopic[] | void>
-    getLessonsByCourseId: (courseId: string) => Promise<ILessonWithTopic[] | void>
+    login: (email: string, password: string) => void,
+    getMyOrganizations: () => Promise<IOrganization[] | void>,
+    getTopicByCourseId: (courseId: string) => Promise<ITopic[] | void>,
+    getLessonsByCourseId: (courseId: string) => Promise<ILessonWithTopic[] | void>,
+    setAlert: (information: IAlert | null) => void
+}
+
+export interface IAlert{
+    typeAlert: "success" | "error" | "warning",
+    message: string,
+    code?: number
 }
 
 export interface IModal {
