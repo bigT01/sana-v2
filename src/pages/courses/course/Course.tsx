@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import ExpandableTableOfContents from "../../../components/table/ExpandableTableOfContents";
 import {grey} from "@mui/material/colors";
-import {FiBook, FiShoppingBag} from "react-icons/fi";
+import {FiBook, FiPlay, FiShoppingBag} from "react-icons/fi";
 import {RiBarChart2Line} from "react-icons/ri";
 import {
     FaCertificate,
@@ -16,10 +16,11 @@ import {
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useStore} from "../../../store/useStore";
 import {ICourse, IState, ITopic} from "../../../constants/interfaces";
 
+const textbuttonContiue = 'Continue course' 
 
 const Course = () => {
     const getCourseById = useStore((state: IState) => state.getCourseById)
@@ -28,6 +29,7 @@ const Course = () => {
     const requestToEnroll = useStore((state: IState) => state.enrollToCourse)
 
     const params = useParams();
+    const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false)
     const [buttonText, setButtonText] = useState<string>('Enroll a course')
@@ -38,7 +40,10 @@ const Course = () => {
 
     useEffect(() => {
         if(loading){
-            requestToEnroll(params?.courseId ? +params?.courseId : 0)
+            if(buttonText === textbuttonContiue){
+                navigate(`lesson`)
+            } else {
+                requestToEnroll(params?.courseId ? +params?.courseId : 0)
                 .then(() => {
                     setButtonText('Request sent');
                     setIsButtonDisabled(true);
@@ -47,6 +52,7 @@ const Course = () => {
                     setButtonText('Enroll a course');
                     setIsButtonDisabled(false);
                 })
+            }
         }
     }, [loading]);
 
@@ -72,7 +78,7 @@ const Course = () => {
                 const dataGetEnrolledCourse = await getEnrolledCourse(params.courseId ? +params.courseId : 0);
                 if (dataGetEnrolledCourse) {
                     if(dataGetEnrolledCourse.status === 'approved'){
-                        setButtonText('Continue course');
+                        setButtonText(textbuttonContiue);
                         setIsButtonDisabled(false);
                     }else{
                         setButtonText('Request sent');
@@ -204,7 +210,7 @@ const Course = () => {
                                         width: '45%'
                                     }} onClick={() => {
                                 setLoading(true)
-                            }} variant="contained" startIcon={<FiShoppingBag/>}>
+                            }} variant="contained" startIcon={buttonText === textbuttonContiue ? <FiPlay /> :<FiShoppingBag/>}>
                                 {buttonText}
                             </Button>
 
