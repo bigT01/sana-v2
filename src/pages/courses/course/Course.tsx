@@ -23,7 +23,9 @@ import {ICourse, IState, ITopic} from "../../../constants/interfaces";
 
 const Course = () => {
     const getCourseById = useStore((state: IState) => state.getCourseById)
+    const getEnrolledCourse = useStore((state: IState) => state.getEnrolledCourse)
     const getTopicByCourseId = useStore((state: IState) => state.getTopicByCourseId)
+    const requestToEnroll = useStore((state: IState) => state.enrollToCourse)
 
     const params = useParams();
 
@@ -36,14 +38,15 @@ const Course = () => {
 
     useEffect(() => {
         if(loading){
-            const timeOut = setTimeout(() => {
-                setButtonText('Request was sent')
-                setIsButtonDisabled(true)
-                setLoading(false)
-
-            }, 1500)
-
-            return () => clearTimeout(timeOut);
+            requestToEnroll(params?.courseId ? +params?.courseId : 0)
+                .then(() => {
+                    setButtonText('Request sent');
+                    setIsButtonDisabled(true);
+                })
+                .catch(() => {
+                    setButtonText('Enroll a course');
+                    setIsButtonDisabled(false);
+                })
         }
     }, [loading]);
 
@@ -64,6 +67,21 @@ const Course = () => {
                     console.error("Failed to fetch courses:", error);
                     setCourse(null); // Обрабатываем ошибку, например, сбрасываем состояние
                 }
+            }
+            try {
+                const dataGetEnrolledCourse = await getEnrolledCourse(params.courseId ? +params.courseId : 0);
+                if (dataGetEnrolledCourse) {
+                    if(dataGetEnrolledCourse.status === 'approved'){
+                        setButtonText('Continue course');
+                        setIsButtonDisabled(false);
+                    }else{
+                        setButtonText('Request sent');
+                        setIsButtonDisabled(true);
+                    }
+                }
+            } catch (error) {
+                console.error("Failed to fetch enrolled course:", error);
+                setCourse(null); // Обрабатываем ошибку, например, сбрасываем состояние
             }
         };
 
@@ -180,9 +198,9 @@ const Course = () => {
                                     loading={loading}
                                     disabled={isButtonDisabled}
                                     loadingIndicator="Loading…"
+                                    style={{color: '#FFFFFF !impotant',}}
                                     sx={{
                                         // bgcolor: (theme) => theme.palette.mode === 'dark' ? '#FFFFFF' : brand[500],
-                                        color: '#FFFFFF !impotant',
                                         width: '45%'
                                     }} onClick={() => {
                                 setLoading(true)

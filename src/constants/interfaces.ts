@@ -10,7 +10,9 @@ export interface IState {
     getMyOrganizations: () => Promise<IOrganization[] | void>,
     getTopicByCourseId: (courseId: string) => Promise<ITopic[] | void>,
     getLessonsByCourseId: (courseId: string) => Promise<ILessonWithTopic[] | void>,
-    setAlert: (information: IAlert | null) => void
+    setAlert: (information: IAlert | null) => void,
+    enrollToCourse: (courseId: number) => Promise<IRequestEnrollment | void>
+    getEnrolledCourse: (courseId: number) => Promise<IRequestEnrollment | void>
 }
 
 export interface IAlert{
@@ -38,6 +40,14 @@ export interface ICourse {
     description: string,
     image_url: string,
     "category": ICategory | null
+}
+
+export interface IRequestEnrollment {
+    course: ICourse,
+    course_id: number,
+    id: number,
+    status: "pending" | "approved" | "rejected",
+    user_id: number,
 }
 
 export interface ILesson {

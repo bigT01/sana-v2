@@ -35,7 +35,6 @@ const Card = styled(MuiCard)(({theme}) => ({
 
 const SignInComponent = () => {
     const login = useStore((state: IState) => state.login)
-    const token = useStore((state: IState) => state.token)
 
     const navigate = useNavigate()
 
@@ -53,12 +52,6 @@ const SignInComponent = () => {
             login(email, password)
         }
     };
-
-    useEffect(() => {
-        if(token){
-            navigate('/')
-        }
-    }, [token]);
 
     const validateInputs = () => {
         let isValid = true;
