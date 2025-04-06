@@ -2,6 +2,7 @@ export interface IState {
     token: string | null,
     modal: IModal,
     alert: IAlert | null,
+    logout: () => void,
     setToken: (token: string | null) => void,
     setModal: ({isModalOpen, ModalType}:IModal) => void,
     getAllCourses: () => Promise<ICourse[] | void>,

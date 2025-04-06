@@ -9,6 +9,7 @@ import {getTopicByCourseId} from "./storeAction/topic/getTopicByCourseId";
 import {getLessonsByCourseId} from "./storeAction/lesson/GetLessonsByCourseId";
 import { enrollToCourse } from "./storeAction/course/enrollToCourse";
 import { getEnrolledCourse } from "./storeAction/course/getEnrolledCourse";
+import { Logout } from "./storeAction/auth/Logout";
 
 export const useStore = create<IState>()(
     devtools(
@@ -22,6 +23,7 @@ export const useStore = create<IState>()(
                 getAllCourses: () => getAllCourses(set, get),
                 getCourseById: (courseId) => getCourseById(set, get, courseId),
                 login: (email, password) => Login(set, get, email, password),
+                logout: () => Logout(set, get),
                 getMyOrganizations: () => getMyOrganizations(set, get),
                 getTopicByCourseId: (courseId) => getTopicByCourseId(set, get, courseId),
                 getLessonsByCourseId: (courseId) => getLessonsByCourseId(set, get, courseId),
