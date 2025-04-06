@@ -11,7 +11,7 @@ export interface IState {
     getTopicByCourseId: (courseId: string) => Promise<ITopic[] | void>,
     getLessonsByCourseId: (courseId: string) => Promise<ILessonWithTopic[] | void>,
     setAlert: (information: IAlert | null) => void,
-    enrollToCourse: (courseId: number) => Promise<IRequestEnrollment | void>
+    enrollToCourse: (courseId: number, organizationId: number) => Promise<IRequestEnrollment | void>
     getEnrolledCourse: (courseId: number) => Promise<IRequestEnrollment | void>
 }
 

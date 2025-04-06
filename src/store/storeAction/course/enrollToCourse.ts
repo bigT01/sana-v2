@@ -6,13 +6,15 @@ export const enrollToCourse = async (
     set: (partial: Partial<IState>) => void,
     get: () => IState,
     courseId: number,
+    organizationId: number
 ): Promise<IRequestEnrollment | void> => {
 
     try {
         const {token} = get();
         const response = await axios.post<IRequestEnrollment>(
             "/enroll-to-course", {
-                course_id: courseId
+                course_id: courseId,
+                organization_id: organizationId
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,

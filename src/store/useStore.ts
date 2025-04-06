@@ -26,7 +26,7 @@ export const useStore = create<IState>()(
                 getTopicByCourseId: (courseId) => getTopicByCourseId(set, get, courseId),
                 getLessonsByCourseId: (courseId) => getLessonsByCourseId(set, get, courseId),
                 setAlert: (information: IAlert | null) => set({alert: information}, false, "set-alert"),
-                enrollToCourse: (courseId) => enrollToCourse(set, get, courseId),
+                enrollToCourse: (courseId, organizationId) => enrollToCourse(set, get, courseId, organizationId),
                 getEnrolledCourse: (courseId) => getEnrolledCourse(set, get, courseId),
             }), {name: "quiz-storage"}
         )

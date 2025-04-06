@@ -20,7 +20,13 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useStore} from "../../../store/useStore";
 import {ICourse, IState, ITopic} from "../../../constants/interfaces";
 
-const textbuttonContiue = 'Continue course' 
+const textbuttonContiue = 'Continue course'
+const textbuttonEnroll = 'Enroll a course'
+const textbuttonRequest = 'Request sent' 
+
+type textbuttonAllType = 'Continue course'|
+    'Enroll a course'|
+    'Request sent'
 
 const Course = () => {
     const getCourseById = useStore((state: IState) => state.getCourseById)
@@ -32,7 +38,7 @@ const Course = () => {
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false)
-    const [buttonText, setButtonText] = useState<string>('Enroll a course')
+    const [buttonText, setButtonText] = useState<textbuttonAllType>(textbuttonEnroll)
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
 
     const [course, setCourse] = useState<ICourse | null>(null)
@@ -43,15 +49,19 @@ const Course = () => {
             if(buttonText === textbuttonContiue){
                 navigate(`lesson`)
             } else {
-                requestToEnroll(params?.courseId ? +params?.courseId : 0)
-                .then(() => {
-                    setButtonText('Request sent');
-                    setIsButtonDisabled(true);
-                })
-                .catch(() => {
-                    setButtonText('Enroll a course');
-                    setIsButtonDisabled(false);
-                })
+                const postEnrollToCourse = async () => {
+                const request = await requestToEnroll(params?.courseId ? +params?.courseId : 0, params?.organizationId ? +params?.organizationId : 0)
+                    if(request){
+                        setButtonText(textbuttonRequest)
+                        setIsButtonDisabled(true)
+                        setLoading(false)
+                    } else {
+                        setButtonText(textbuttonEnroll)
+                        setIsButtonDisabled(false)
+                        setLoading(false)
+                    }
+                }
+                postEnrollToCourse()
             }
         }
     }, [loading]);
