@@ -12,6 +12,7 @@ import Home from "./pages/home/Home";
 import Course from "./pages/courses/course/Course";
 import Lessons from "./pages/courses/course/lessons/Lessons";
 import Lesson from "./pages/courses/course/lessons/lesson/Lesson";
+import OrganizationCourse from './pages/organizationCourse/OrganizationCourse';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -32,6 +33,7 @@ root.render(
                             <Route path="/:organizationId" element={<Home />}/>
                             <Route path="/:organizationId/courses" element={<Courses />}/>
                             <Route path="/:organizationId/courses/:courseId/:courseName" element={<Course />}/>
+                            <Route path="/:organizationId/organization-courses" element={<OrganizationCourse />}/>
                             <Route path="/:organizationId/courses/:courseId/:courseName/lesson" element={<Lessons />}>
                                 <Route path="/:organizationId/courses/:courseId/:courseName/lesson/:lessonId/:lessonName" element={<Lesson />}/>
                             </Route>

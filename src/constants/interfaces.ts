@@ -15,6 +15,7 @@ export interface IState {
     enrollToCourse: (courseId: number, organizationId: number) => Promise<IRequestEnrollment | void>
     getEnrolledCourse: (courseId: number) => Promise<IRequestEnrollment | void>
     getProfile: () => Promise<IProfile | void>
+    getCourseByOrganizationId: (organizationId: string) => Promise<ICourse[] | void>
 }
 
 export interface IAlert{
