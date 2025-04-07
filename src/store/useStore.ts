@@ -10,6 +10,7 @@ import {getLessonsByCourseId} from "./storeAction/lesson/GetLessonsByCourseId";
 import { enrollToCourse } from "./storeAction/course/enrollToCourse";
 import { getEnrolledCourse } from "./storeAction/course/getEnrolledCourse";
 import { Logout } from "./storeAction/auth/Logout";
+import { getProfile } from "./storeAction/user/getProfile";
 
 export const useStore = create<IState>()(
     devtools(
@@ -30,6 +31,7 @@ export const useStore = create<IState>()(
                 setAlert: (information: IAlert | null) => set({alert: information}, false, "set-alert"),
                 enrollToCourse: (courseId, organizationId) => enrollToCourse(set, get, courseId, organizationId),
                 getEnrolledCourse: (courseId) => getEnrolledCourse(set, get, courseId),
+                getProfile: () => getProfile(set, get),
             }), {name: "quiz-storage"}
         )
     )

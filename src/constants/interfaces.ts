@@ -14,6 +14,7 @@ export interface IState {
     setAlert: (information: IAlert | null) => void,
     enrollToCourse: (courseId: number, organizationId: number) => Promise<IRequestEnrollment | void>
     getEnrolledCourse: (courseId: number) => Promise<IRequestEnrollment | void>
+    getProfile: () => Promise<IProfile | void>
 }
 
 export interface IAlert{
@@ -80,6 +81,15 @@ export interface ITopic {
 
 export interface ILoginResponse {
     access_token: string
+}
+
+export interface IProfile {
+    email: string,
+    id: number,
+    name: string,
+    password: string,
+    phone: string,
+    role: "student" | "manager",
 }
 
 export interface ILessonWithTopic extends ITopic {

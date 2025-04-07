@@ -12,10 +12,18 @@ import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import BackpackIcon from '@mui/icons-material/Backpack';
 import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
+import { useStore } from '../../store/useStore';
+import { IState } from '../../constants/interfaces';
+import MenuContentInformation from './menuContentInformation';
 
-const mainListItems = [
+const studentListItems = [
     {text: 'Home', icon: <HomeRoundedIcon/>, link: ''},
     {text: 'Courses', icon: <BackpackIcon/>, link: 'courses'},
+];
+
+const managerListItems = [
+    {text: 'Home', icon: <HomeRoundedIcon/>, link: ''},
+    {text: 'Courses', icon: <BackpackIcon/>, link: 'organization-courses'},
 ];
 
 const secondaryListItems = [
@@ -25,35 +33,34 @@ const secondaryListItems = [
 ];
 
 export default function MenuContent() {
+    const getProfile = useStore((state: IState) => state.getProfile);
     const location = useLocation();
     const navigate = useNavigate();
 
-    const [activeItem, setActiveItem] = useState<string>('/')
+    
+    const [role, setRole] = useState<'student' | 'manager' | null>(null)
 
+    
     useEffect(() => {
-        for (let item of mainListItems) {
-            const shiftedLink = item.link
-            if (location.pathname.split('/').includes(shiftedLink)) {
-                setActiveItem(item.link)
+        const fetchProfile = async () => {
+            try {
+                const data = await getProfile();
+                if(data){
+                    setRole(data.role);
+                }
+            } catch (error) {
+                console.error("Failed to fetch profile:", error);
             }
         }
-    }, [location])
+        fetchProfile()
+    }, []);
+
+    
 
     return (
         <Stack sx={{flexGrow: 1, p: 1, justifyContent: 'space-between'}}>
             <List dense>
-                {mainListItems.map((item, index) => (
-                    <ListItem key={index} disablePadding sx={{display: 'block'}}>
-                        <ListItemButton
-                            sx={{cursor: 'pointer'}}
-                            selected={activeItem === `${item.link}`}
-                            onClick={() => navigate(item.link)}
-                        >
-                            <ListItemIcon>{item.icon}</ListItemIcon>
-                            <ListItemText primary={item.text}/>
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+                {role ? <MenuContentInformation items={role === 'student' ? studentListItems : managerListItems}/> : null}
             </List>
             <List dense>
                 {secondaryListItems.map((item, index) => (

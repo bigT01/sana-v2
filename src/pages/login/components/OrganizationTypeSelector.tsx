@@ -14,7 +14,7 @@ const OrganizationTypeSelector = () => {
     const token = useStore((state: IState) => state.token);
     const getMyOrganizations = useStore((state: IState) => state.getMyOrganizations);
 
-    const [organizations, setOrganizations] = useState<IOrganization[] | null>(null)
+    const [organizations, setOrganizations] = useState<IOrganization[]>([])
     const [selected, setSelected] = useState<number>(-100);
 
     useEffect(() => {
@@ -26,7 +26,7 @@ const OrganizationTypeSelector = () => {
                 }
             } catch (error) {
                 console.error("Failed to fetch courses:", error);
-                setOrganizations(null); // Обрабатываем ошибку, например, сбрасываем состояние
+                setOrganizations([]); // Обрабатываем ошибку, например, сбрасываем состояние
             }
         };
 
@@ -44,7 +44,7 @@ const OrganizationTypeSelector = () => {
     return (
         <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <Box display="flex" flexWrap={'wrap'} justifyContent={'space-between'} gap={2} marginBottom={4}>
-                {organizations ? organizations.map((type) => (
+                {organizations?.length > 0 ? organizations.map((type) => (
                     <Card
                         key={type.id}
                         sx={{
@@ -74,12 +74,20 @@ const OrganizationTypeSelector = () => {
                             </CardContent>
                         </Card>
                     </Card>
-                )) : 'you not joined any organization yet'}
+                )) : (
+                    <Box display={'flex'} width={'100%'} flexDirection={'column'}>
+                        <Typography variant="h4" sx={{fontSize: '18px', mb: 4, textAlign: 'center'}}>
+                            You have no added to any organization
+                        </Typography>
+                        <img src="/notFound.svg" width={400} alt="icon:notfound" />
+                    </Box>
+                )
+                }
 
             </Box>
-            <Button onClick={() => handleSelect()} variant="contained" size={'large'} color={'info'} disabled={selected > 0 ? false : true} sx={{mx: 'auto', fontSize: '24px', color: 'white', fontWeight: '600'}}>
+            {organizations.length > 0 ? <Button onClick={() => handleSelect()} variant="contained" size={'large'} color={'info'} disabled={selected > 0 ? false : true} sx={{mx: 'auto', fontSize: '24px', color: 'white', fontWeight: '600'}}>
                 Select
-            </Button>
+            </Button> : null} 
         </Box>
     );
 };
