@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import {Navigate, Outlet} from 'react-router-dom';
 import {useStore} from "../store/useStore";
 import {IState} from "../constants/interfaces";
+import Loading from '../pages/Loading';
 
 interface PrivateRouteProps {
     authenticationPath: string;
@@ -25,7 +26,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({authenticationPath}) => {
     , []);
     
     if (!isLoaded) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
     if (!token) {
         return <Navigate to={authenticationPath} />;
