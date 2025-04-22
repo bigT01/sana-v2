@@ -1,5 +1,6 @@
 import {ICourse, IState} from "../../../constants/interfaces";
 import axios from "../../../axios";
+import { AuthonticationCatcher } from "../../../feature/authonticationCatcher";
 
 export const getCourseById = async (
     set: (partial: Partial<IState>) => void,
@@ -13,6 +14,7 @@ export const getCourseById = async (
         );
         return response.data
     } catch (error: any) {
+        AuthonticationCatcher(error);
         console.log(error)
     }
 };

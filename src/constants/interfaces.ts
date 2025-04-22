@@ -16,6 +16,7 @@ export interface IState {
     getEnrolledCourse: (courseId: number) => Promise<IRequestEnrollment | void>
     getProfile: () => Promise<IProfile | void>
     getCourseByOrganizationId: (organizationId: string) => Promise<ICourse[] | void>
+    giveAccessToStudent: (id: number, isAccess: boolean) => Promise<IRequestEnrollment | void>
 }
 
 export interface IAlert{
@@ -43,6 +44,8 @@ export interface ICourse {
     description: string,
     image_url: string,
     "category": ICategory | null
+    topics?: ITopic[] | null,
+    enrollments?: IEnrollment[] | null,
 }
 
 export interface IRequestEnrollment {
@@ -78,6 +81,14 @@ export interface ITopic {
     course_id: number,
     name: string,
     description: string
+}
+
+export interface IEnrollment {
+    course_id: number,
+    id: number,
+    status: "pending" | "approved" | "rejected",
+    user?: IProfile,
+    user_id: number,
 }
 
 export interface ILoginResponse {

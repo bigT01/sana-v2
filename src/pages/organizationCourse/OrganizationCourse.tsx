@@ -1,5 +1,5 @@
 import { Box, Button, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { IState } from "../../constants/interfaces";
 import { useStore } from "../../store/useStore";
 import { useEffect, useState } from "react";
@@ -9,7 +9,9 @@ import { DeleteForever } from "@mui/icons-material";
 
 const OrganizationCourse = () => {
     const getCourseByOrganizationId = useStore((state: IState) => state.getCourseByOrganizationId);
+    
     const params = useParams();
+    const navigate = useNavigate();
 
     const [data, setData] = useState<any>([]);
 
@@ -57,7 +59,7 @@ const OrganizationCourse = () => {
                                     <TableCell>{row.category.name}</TableCell>
                                     <TableCell>{row.difficulty}</TableCell>
                                     <TableCell>
-                                        <IconButton color="primary" sx={{mr: 1}} aria-label="show" size="small">
+                                        <IconButton onClick={() => navigate(`${row.id}/${row.name}`)} color="primary" sx={{mr: 1}} aria-label="show" size="small">
                                             <IoMdEye size="16px"/>
                                         </IconButton>
                                         <IconButton color="warning" sx={{mr: 1}} aria-label="edit" size="small">
