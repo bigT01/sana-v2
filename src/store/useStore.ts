@@ -13,6 +13,7 @@ import { Logout } from "./storeAction/auth/Logout";
 import { getProfile } from "./storeAction/user/getProfile";
 import { getCourseByOrganizationId } from "./storeAction/course/getCourseByOrganizationId";
 import { giveAccessToStudent } from "./storeAction/enrollment/giveAccessToStudent";
+import { getLessonsByTopicId } from "./storeAction/lesson/GetLessonsWithTopicId";
 
 export const useStore = create<IState>()(
     devtools(
@@ -30,6 +31,7 @@ export const useStore = create<IState>()(
                 getMyOrganizations: () => getMyOrganizations(set, get),
                 getTopicByCourseId: (courseId) => getTopicByCourseId(set, get, courseId),
                 getLessonsByCourseId: (courseId) => getLessonsByCourseId(set, get, courseId),
+                getLessonsByTopicId: (topicId) => getLessonsByTopicId(set, get, topicId),
                 setAlert: (information: IAlert | null) => set({alert: information}, false, "set-alert"),
                 enrollToCourse: (courseId, organizationId) => enrollToCourse(set, get, courseId, organizationId),
                 getEnrolledCourse: (courseId) => getEnrolledCourse(set, get, courseId),

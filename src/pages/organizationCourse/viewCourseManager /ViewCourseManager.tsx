@@ -1,20 +1,23 @@
 import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams, useRoutes } from "react-router-dom";
 import { useStore } from "../../../store/useStore";
 import { ICourse, IEnrollment, IState, ITopic } from "../../../constants/interfaces";
 import { useEffect, useState } from "react";
 import { IoMdEye } from "react-icons/io";
 import { MdDeleteOutline, MdEdit, MdOutlineDone } from "react-icons/md";
 import { DeleteForever } from "@mui/icons-material";
-import DoneIcon from '@mui/icons-material/Done';
-import { RiChatDeleteLine } from "react-icons/ri";
+
 
 const ViewCourseManager = () => {
     const getCourseById = useStore((state: IState) => state.getCourseById)
     const giveAccessToStudent = useStore((state: IState) => state.giveAccessToStudent)
+    const setModal = useStore((state: IState) => state.setModal)
 
     const params = useParams();
+    const navigate = useNavigate();
+
     const [course, setCourse] = useState<ICourse | null>(null)
+    const [IsButtonsLoading, setIsButtonsLoading] = useState<boolean>(false)
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -35,6 +38,7 @@ const ViewCourseManager = () => {
 
 
     const handleGiveAccessToStudent = async (id: number, isAccess: boolean) => {
+        setIsButtonsLoading(true)
         try {
             const data = await giveAccessToStudent(id, isAccess); // Ожидаем завершения асинхронной операции
             if (data) {
@@ -56,10 +60,12 @@ const ViewCourseManager = () => {
                     }
                     return prevCourse;
                 });
+                setIsButtonsLoading(false)
             }
         } catch (error) {
             console.error("Failed to give access to student:", error);
             // Обрабатываем ошибку, например, показываем уведомление
+            setIsButtonsLoading(false)
         }
     };
     return (
@@ -98,7 +104,7 @@ const ViewCourseManager = () => {
                                                     <TableCell>{row.name}</TableCell>
                                                     <TableCell sx={{width: "40%"}}>{row.description}</TableCell>
                                                     <TableCell>
-                                                        <IconButton color="primary" sx={{mr: 1}} aria-label="show" size="small">
+                                                        <IconButton onClick={() => navigate(`${row.id}/${row.name}`)} color="primary" sx={{mr: 1}} aria-label="show" size="small">
                                                             <IoMdEye size="16px"/>
                                                         </IconButton>
                                                         <IconButton color="warning" sx={{mr: 1}} aria-label="edit" size="small">
@@ -150,10 +156,10 @@ const ViewCourseManager = () => {
                                                     <TableCell sx={{width: '25%'}} colSpan={1}>{row?.user ? row.user.name : row.user_id}</TableCell>
                                                     <TableCell sx={{width: '25%'}} colSpan={1}>{row.status}</TableCell>
                                                     <TableCell sx={{width: '25%'}} colSpan={1}>
-                                                        <IconButton onClick={() => handleGiveAccessToStudent(row.id, true)} color="primary" sx={{mr: 1}} aria-label="show" size="small">
+                                                        <IconButton loading={IsButtonsLoading} onClick={() => handleGiveAccessToStudent(row.id, true)} color="primary" sx={{mr: 1}} aria-label="show" size="small">
                                                             <MdOutlineDone size="16px"/>
                                                         </IconButton>
-                                                        <IconButton onClick={() => handleGiveAccessToStudent(row.id, false)} color="error" aria-label="edit" size="small">
+                                                        <IconButton loading={IsButtonsLoading} onClick={() => handleGiveAccessToStudent(row.id, false)} color="error" aria-label="edit" size="small">
                                                             <MdDeleteOutline size="16px"/>
                                                         </IconButton>
                                                     </TableCell>

@@ -29,7 +29,7 @@ export default function NavbarBreadcrumbs() {
             const filteredPathnames = pathnames.filter(item => !/^\d+$/.test(item));
             filteredPathnames.shift()
             if (filteredPathnames) {
-                setPathname(filteredPathnames)
+                setPathname(filteredPathnames.map(item => item.includes('%20') ? item.replaceAll('%20', ' ') : item))
             }
         }
     }, [location]);

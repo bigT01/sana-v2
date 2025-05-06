@@ -14,6 +14,7 @@ import Lessons from "./pages/courses/course/lessons/Lessons";
 import Lesson from "./pages/courses/course/lessons/lesson/Lesson";
 import OrganizationCourse from './pages/organizationCourse/OrganizationCourse';
 import ViewCourseManager from './pages/organizationCourse/viewCourseManager /ViewCourseManager';
+import TopicLessons from './pages/organizationCourse/viewCourseManager /topicLessons/TopicLessons';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -36,6 +37,7 @@ root.render(
                             <Route path="/:organizationId/courses/:courseId/:courseName" element={<Course />}/>
                             <Route path="/:organizationId/organization-courses" element={<OrganizationCourse />}/>
                             <Route path="/:organizationId/organization-courses/:courseId/:courseName" element={<ViewCourseManager />}/>
+                            <Route path="/:organizationId/organization-courses/:courseId/:courseName/:topicId/:topicName" element={<TopicLessons />}/>
                             <Route path="/:organizationId/courses/:courseId/:courseName/lesson" element={<Lessons />}>
                                 <Route path="/:organizationId/courses/:courseId/:courseName/lesson/:lessonId/:lessonName" element={<Lesson />}/>
                             </Route>

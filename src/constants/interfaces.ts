@@ -11,6 +11,7 @@ export interface IState {
     getMyOrganizations: () => Promise<IOrganization[] | void>,
     getTopicByCourseId: (courseId: string) => Promise<ITopic[] | void>,
     getLessonsByCourseId: (courseId: string) => Promise<ILessonWithTopic[] | void>,
+    getLessonsByTopicId: (topicId: string) => Promise<ITopicWithLessons | void>,
     setAlert: (information: IAlert | null) => void,
     enrollToCourse: (courseId: number, organizationId: number) => Promise<IRequestEnrollment | void>
     getEnrolledCourse: (courseId: number) => Promise<IRequestEnrollment | void>
@@ -62,8 +63,13 @@ export interface ILesson {
     description: string,
     video_url: string,
     source_url: string,
+    image_url?: string;
     name: string,
     created_at: string
+}
+
+export interface ITopicWithLessons extends ITopic {
+    lessons: ILesson[]
 }
 
 export interface IOrganization {
