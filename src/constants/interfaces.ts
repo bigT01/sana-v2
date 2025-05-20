@@ -17,7 +17,8 @@ export interface IState {
     getEnrolledCourse: (courseId: number) => Promise<IRequestEnrollment | void>
     getProfile: () => Promise<IProfile | void>
     getCourseByOrganizationId: (organizationId: string) => Promise<ICourse[] | void>
-    giveAccessToStudent: (id: number, isAccess: boolean) => Promise<IRequestEnrollment | void>
+    giveAccessToStudent: (id: number, isAccess: boolean) => Promise<IRequestEnrollment | void>,
+    getLessonById: (lessonId: string) => Promise<ILesson | void>
 }
 
 export interface IAlert{

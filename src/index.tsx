@@ -11,10 +11,12 @@ import Courses from "./pages/courses/Courses";
 import Home from "./pages/home/Home";
 import Course from "./pages/courses/course/Course";
 import Lessons from "./pages/courses/course/lessons/Lessons";
-import Lesson from "./pages/courses/course/lessons/lesson/Lesson";
+
 import OrganizationCourse from './pages/organizationCourse/OrganizationCourse';
-import ViewCourseManager from './pages/organizationCourse/viewCourseManager /ViewCourseManager';
-import TopicLessons from './pages/organizationCourse/viewCourseManager /topicLessons/TopicLessons';
+import ViewCourseManager from './pages/organizationCourse/viewCourseManager/ViewCourseManager';
+import TopicLessons from './pages/organizationCourse/viewCourseManager/topicLessons/TopicLessons';
+import Lesson from './pages/courses/course/lessons/lesson/Lesson';
+import LessonOrganizationCourse from './pages/organizationCourse/viewCourseManager/topicLessons/lesson/Lesson';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -38,6 +40,7 @@ root.render(
                             <Route path="/:organizationId/organization-courses" element={<OrganizationCourse />}/>
                             <Route path="/:organizationId/organization-courses/:courseId/:courseName" element={<ViewCourseManager />}/>
                             <Route path="/:organizationId/organization-courses/:courseId/:courseName/:topicId/:topicName" element={<TopicLessons />}/>
+                            <Route path="/:organizationId/organization-courses/:courseId/:courseName/:topicId/:topicName/:lessonId" element={<LessonOrganizationCourse/>}/> 
                             <Route path="/:organizationId/courses/:courseId/:courseName/lesson" element={<Lessons />}>
                                 <Route path="/:organizationId/courses/:courseId/:courseName/lesson/:lessonId/:lessonName" element={<Lesson />}/>
                             </Route>

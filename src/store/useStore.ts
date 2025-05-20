@@ -14,6 +14,7 @@ import { getProfile } from "./storeAction/user/getProfile";
 import { getCourseByOrganizationId } from "./storeAction/course/getCourseByOrganizationId";
 import { giveAccessToStudent } from "./storeAction/enrollment/giveAccessToStudent";
 import { getLessonsByTopicId } from "./storeAction/lesson/GetLessonsWithTopicId";
+import { getLessonById } from "./storeAction/lesson/GetLessonById";
 
 export const useStore = create<IState>()(
     devtools(
@@ -38,6 +39,7 @@ export const useStore = create<IState>()(
                 getProfile: () => getProfile(set, get),
                 getCourseByOrganizationId: (organizationId) => getCourseByOrganizationId(set, get, organizationId),
                 giveAccessToStudent: (id, isAccess) => giveAccessToStudent(set, get, id, isAccess),
+                getLessonById: (lessonId: string) => getLessonById(set, get, lessonId),
             }), {name: "quiz-storage"}
         )
     )

@@ -1,6 +1,6 @@
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material"
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useStore } from "../../../../store/useStore";
 import { IState, ITopicWithLessons } from "../../../../constants/interfaces";
 
@@ -8,6 +8,7 @@ const TopicLessons = () => {
     const getLessonsByTopicId = useStore((state: IState) => state.getLessonsByTopicId)
 
     const params = useParams();
+    const navigate = useNavigate();
 
     const [data, setData] = useState<ITopicWithLessons | null>()
 
@@ -59,7 +60,7 @@ const TopicLessons = () => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button color="secondary" size="small">View</Button>
+                                    <Button color="secondary" onClick={() => navigate(`${lesson.id}`)} size="small">View</Button>
                                     <Button color="info" size="small">Delete</Button>
                                 </CardActions>
                             </Card>
