@@ -41,28 +41,29 @@ const TopicLessons = () => {
                         </Typography>
                     </Box>
                     <Box sx={{display: 'grid', gridTemplateColumns: "1fr 1fr 1fr ", gap: '2rem'}}>
-                    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-      sx={{mb: 1}}
-        component="img"
-        alt="green iguana"
-        height="140"
-        image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLLs-VUI3QCuobhbhRQqJxArBq8NlwzN8cuA&s"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
-        <Typography variant="body2" sx={{ mb: 1, color: 'text.secondary' }}>
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button color="secondary" size="small">View</Button>
-        <Button color="info" size="small">Delete</Button>
-      </CardActions>
-    </Card>
+                        {data.lessons.map((lesson) => (
+                            <Card sx={{ maxWidth: 345 }}>
+                                <CardMedia
+                                sx={{mb: 1}}
+                                    component="img"
+                                    alt="green iguana"
+                                    height="140"
+                                    image={lesson.image_url ? lesson.image_url : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLLs-VUI3QCuobhbhRQqJxArBq8NlwzN8cuA&s"}
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                        {lesson.name}
+                                    </Typography>
+                                    <Typography variant="body2" sx={{ mb: 1, color: 'text.secondary' }}>
+                                        {lesson.description}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Button color="secondary" size="small">View</Button>
+                                    <Button color="info" size="small">Delete</Button>
+                                </CardActions>
+                            </Card>
+                        ))}
                     </Box>
                 </>
             ) : "there is no course with this id"}
